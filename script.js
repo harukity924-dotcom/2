@@ -20,7 +20,7 @@ function updateTime(){
     let totalSeconds = studyTime;
 
     if (isRunning && startTime){
-      const now = Date,now();
+      const now = Date.now();
       const elapsed = Math.floor((now - startTime)/1000);
       totalSeconds += elapsed;
     }
