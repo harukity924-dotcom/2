@@ -4,6 +4,7 @@ body{
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 10px;
     background-color: #f5f7fa;
     font-family: sans-serif;
 }
