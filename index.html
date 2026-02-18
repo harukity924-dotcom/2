@@ -6,13 +6,25 @@
     <link rel = "Stylesheet" href="style.css">
 </head>
 <body>
+    <div class ="container">
     <h1>📚 Study Timer</h1>
+    
+    <select id="subject">
+        <option value="html5">HTML5プロフェッショナル認定試験</option>
+        <option value="ouyou">応用情報技術者試験</option>
+        <option value="kanken">漢検準2級</option>
+    </select>
+
     <p>🏹 目標時間：<span id ="goal">60</span>分</p>
     <p>勉強時間：<span id ="time">0</span></p>
     <button id = "startBtn">▶ 開始</button>
     <button id = "stopBtn">⏸ 停止</button>
+    <button id = "saveBtn">保存</button>
+    <button id = "resetBtn">リセット</button>
     <p id = "todayLog"></p>
+    <p id = "weekLog"></p>
     <a href="log.html">📚Study Logを見る</a>
+    </div>
     <script src ="script.js"></script>
 </body>
 </html>
