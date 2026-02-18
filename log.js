@@ -24,9 +24,24 @@ window.addEventListener("DOMContentLoaded",function(){
         dateKeys.forEach(key => {
             const value = localStorage.getItem(key);
             
-            const seconds = Number(value);
-                totalSecondsAll += seconds;
-                
+            let seconds = 0;
+
+            try {
+                const parsed = JSON.parse(value);
+
+                if (typeof parsed ==="object"){
+                    seconds = Object.values(parsed)
+                    .map(v => Number(v) || 0)
+                    .reduce((sum,v) => sum + v,0);
+                } else {
+                    seconds = Number(parsed) || 0;
+                }
+            } catch {
+                seconds = Number(value) || 0;
+            }
+
+            totalSecondsAll += seconds;
+
             const minutes = Math.floor(seconds/60);
             const remainSeconds = seconds % 60;
 
