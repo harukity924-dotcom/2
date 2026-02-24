@@ -5,17 +5,32 @@ function getSubject(){
 function saveSubject(subject){
     localStorage.setItem("subject",JSON.stringify(subject));
 }
-function renderSubject(){
-    const list  = document.getElementById("subjectselect");
 
-    if (!select) return;
+function renderSelect(){
+    const select = document.getElementById("subjectselect");
+    if(!select) return;
+
+    select.innerHTML = "";
+
+    getSubject().forEach(sub => {
+        const option = document.createElement("option");
+        option.value = sub;
+        option.textContent = sub;
+        select.appendChild(option);
+    });
+}
+
+function renderSubject(){
+    const list  = document.getElementById("subjectList");
+
+    if (!list) return;
 
     list.innerHTML = "";
 
     const subject = getSubject();
 
     if(subject.length === 0){
-        list.innerHTML = "<li>科目がありません<li>";
+        list.innerHTML = "<li>科目がありません</li>";
         return;
     }
 
@@ -52,7 +67,9 @@ function addSubject(){
 
     subject.push(newSub);
     saveSubject(subject);
+
     renderSubject();
+    renderSelect();
 
     input.value = "";
 }
@@ -63,6 +80,10 @@ function addSubject(){
         const subjects = getSubject().filter(sub => sub !== name);
         saveSubject(subjects);
         renderSubject();
+        renderSelect();
     }
 
-window.addEventListener("DOMContentLoaded",renderSubject);
+window.addEventListener("DOMContentLoaded", () => {
+    renderSelect();
+    renderSubject();
+});
