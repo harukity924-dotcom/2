@@ -75,7 +75,7 @@ function addSubject(){
 }
 
     function deleteSubject(name) {
-        if(!confirm(`「${name}を削除しますか？」`)) return;
+        if(!confirm(`「${name}」を削除しますか？`)) return;
 
         const subjects = getSubject().filter(sub => sub !== name);
         saveSubject(subjects);
