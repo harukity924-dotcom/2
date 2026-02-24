@@ -6,14 +6,34 @@ function saveSubject(subject){
     localStorage.setItem("subject",JSON.stringify(subject));
 }
 function renderSubject(){
-    const select = document.getElementById("subjectselect");
-    select.innerHTML = "";
+    const list  = document.getElementById("subjectselect");
+
+    if (!select) return;
+
+    list.innerHTML = "";
+
+    const subject = getSubject();
+
+    if(subject.length === 0){
+        list.innerHTML = "<li>科目がありません<li>";
+        return;
+    }
 
     getSubject().forEach(sub => {
-        const option = document.createElement("option");
-        option.value = sub;
-        option.textContent = sub;
-        select.appendChild(option);
+        const li = document.createElement("li");
+
+        const span = document.createElement("span");
+        span.textContent = sub;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "×"
+        deleteBtn.style.marginLeft = "10px";
+
+        deleteBtn.onclick = () => deleteSubject(sub);
+
+        li.appendChild(span);
+        li.appendChild(deleteBtn);
+        list.appendChild(li);
     });
 }
 
@@ -24,7 +44,7 @@ function addSubject(){
     if(!newSub) return;
 
     const subject = getSubject();
-    
+
     if(subject.includes(newSub)){
         alert("すでに登録されています");
         return;
@@ -37,6 +57,12 @@ function addSubject(){
     input.value = "";
 }
 
-window.addEventListener("DOMContentLoaded",() => {
-    renderSubject();
-});
+    function deleteSubject(name) {
+        if(!confirm(`「${name}を削除しますか？」`)) return;
+
+        const subjects = getSubject().filter(sub => sub !== name);
+        saveSubject(subjects);
+        renderSubject();
+    }
+
+window.addEventListener("DOMContentLoaded",renderSubject);

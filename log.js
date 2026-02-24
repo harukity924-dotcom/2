@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded",function(){
         console.error("IDが見つかりません： LogList または totaltime");
         return;
     }
-    
+
     function getTodaykey(){
         const today = new Date;
         return today.toISOString().slice(0,10);
@@ -72,7 +72,7 @@ window.addEventListener("DOMContentLoaded",function(){
                 li.style.color = "red"
             }
             loglist.appendChild(li);
-
+        
         });
 
         const hours = Math.floor(totalSecondsAll / 3600);
@@ -83,4 +83,6 @@ window.addEventListener("DOMContentLoaded",function(){
         "合計：" + hours + "時間" + minutes + "分" +
         String(seconds).padStart(2,"0") + "秒"; 
 
+        document.getElementById("resetAllBtn").addEventListener("click",resetAllRecords);
+        
 });
