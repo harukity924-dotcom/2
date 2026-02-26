@@ -45,3 +45,48 @@ const todaySec = todayseconds % 60;
 
 document.getElementById("todayTime").textContent = 
     todayMin + "分" + String(todaySec).padStart(2,"0") + "秒";
+
+function saveExamDate(subject,date){
+    localStorage.setItem("exam_" + subject,date);
+}
+
+function getExamDate(subject){
+    return localStorage.getItem("exam_" + subject);
+}
+
+//const subjectName = getSubjectFromURL();
+const examInput = document.getElementById("examDate");
+
+examInput.addEventListener("change",() => {
+    saveExamDate(subjectName,examInput.value);
+    updateCountdown();
+})
+
+function updateCountdown(){
+    //const subject = getSubjectFromURL();
+    const examDateStr = getExamDate(subjectName);
+
+    if (!examDateStr){
+        document.getElementById("countDown").textContent = "試験日未設定";
+        return;
+    }
+
+    const now = new Date();
+    const examDate = new Date(examDateStr);
+    const diff = examDate - now;
+
+    if (diff <= 0){
+        document.getElementById("countDown").textContent = "🎉試験日です！";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const minutes = Math.floor((diff / (1000*60)) % 60);
+
+    document.getElementById("countDown").textContent =
+        `${days}日 ${hours}時 ${minutes}分`;
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
