@@ -15,7 +15,7 @@ let timerId = null;
 let studyTime = 0;
 
 function getSelectedSubject(){
-  return document.getElementById("subject").value;
+  return document.getElementById("subjectselect").value;
 }
 
 function getTodayData(){
@@ -158,7 +158,7 @@ window.addEventListener("DOMContentLoaded",function(){
 
 let currentSubject = getSelectedSubject();
 
-document.getElementById("subject").addEventListener("change", () => {
+document.getElementById("subjectselect").addEventListener("change", () => {
   const newSubject = getSelectedSubject();
 
   if (isRunning && startTime){

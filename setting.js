@@ -20,7 +20,7 @@ function renderSelect(){
     });
 }
 
-function renderSubject(){
+function renderSubject(){    
     const list  = document.getElementById("subjectList");
 
     if (!list) return;
@@ -40,6 +40,11 @@ function renderSubject(){
         const span = document.createElement("span");
         span.textContent = sub;
 
+        span.style.cursor = "pointer";
+        span.onclick = () => {
+        location.href = `subject.html?name=${encodeURIComponent(sub)}`;
+        };
+
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "×"
         deleteBtn.style.marginLeft = "10px";
@@ -51,6 +56,7 @@ function renderSubject(){
         list.appendChild(li);
     });
 }
+
 
 function addSubject(){
     const input = document.getElementById("newSubject");
