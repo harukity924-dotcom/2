@@ -57,6 +57,11 @@ function getExamDate(subject){
 //const subjectName = getSubjectFromURL();
 const examInput = document.getElementById("examDate");
 
+const saveDate = getExamDate(subjectName);
+if (saveDate){
+    examInput.value = saveDate;
+}
+
 examInput.addEventListener("change",() => {
     saveExamDate(subjectName,examInput.value);
     updateCountdown();
